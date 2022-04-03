@@ -1,5 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
+import { AccessAlarm, ThreeDRotation } from '@mui/icons-material';
+import Button from '@mui/material/Button';
+
+import logo from 'logo.svg';
+import 'App.css';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         >
           Learn React
         </a>
+        <AccessAlarm />
+        <ThreeDRotation />
+        <Button variant="contained">Hello World</Button>
       </header>
     </div>
   );
