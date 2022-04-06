@@ -45,14 +45,14 @@ function App() {
       <BrowserRouter basename={base_url}>
         <ScopedCssBaseline>
            <ThemeProvider theme={theme}>
-              <Typography>
+              <Typography component={'div'}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Grid container>
                     <NavBar />
                     <Grid item xs={6}>
                       <Routes>
-                        <Route path="/" element={<HomePage />} />
-                          <Route path="result" element={<ResultPage />} />
+                        <Route path="/" element={<HomePage path="/"/>} />
+                          <Route path="result" element={<ResultPage path="result"/>} />
                           <Route path="tags" element={<TagsPage />} />
                         <Route path="*" element={<NoMatch />} />
                       </Routes>

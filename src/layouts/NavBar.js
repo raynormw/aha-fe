@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 
 import { Item } from 'utils/Item';
+import IconSelected from 'assets/icons/selected.png';
+import IconNotSelected from 'assets/icons/notSelected.png';
 
 export default class NavBar extends Component {
+  state = {
+    routes: "home",
+  }
+
+  handleClick(routes) {
+    this.setState({ routes });
+  }
+
   render() {
     return (
       <Grid
@@ -11,6 +22,7 @@ export default class NavBar extends Component {
           display: {
             tablet: 'flex',
           },
+          textAlign: 'center',
           width: {
             tablet: '80px',
             mobile: '100%'
@@ -21,10 +33,6 @@ export default class NavBar extends Component {
           marginTop: {
             tablet: '37px',
             mobile: '28px'
-          },
-          marginLeft: {
-            tablet: '23px',
-            mobile: '21px'
           },
         }}
         item
@@ -48,11 +56,40 @@ export default class NavBar extends Component {
               tablet: 'flex',
               mobile: 'none'
             },
+            justifyContent: 'center',
             marginTop: '46.5px',
-            marginBottom: '18px',
           }}
         >
-          Sidebar
+          {
+              this.state.routes === "home"
+            ?
+              <Link
+                to="/"
+                onClick={() => this.handleClick("home")}
+                style={{ textDecoration: 'none' }}
+              >
+                <img src={IconSelected} alt="Selected Icon" />
+                <Item
+                  sx={{
+                    marginTop: 0,
+                    marginBottom: 0,
+                    fontSize: '14px',
+                    fontWeight: 400,
+                    lineHeight: '150%',
+                    letterSpacing: '0.4px'
+                }}>
+                  Home
+                </Item>
+              </Link>
+            :
+              <Link
+                to="/"
+                onClick={() => this.handleClick("home")}
+                style={{ textDecoration: 'none' }}
+              >
+                <img src={IconNotSelected} alt="Selected Icon" />
+              </Link>
+          }
         </Item>
         <Item
           sx={{
@@ -60,9 +97,40 @@ export default class NavBar extends Component {
               tablet: 'flex',
               mobile: 'none'
             },
+            justifyContent: 'center',
+            marginTop: '18px',
           }}
         >
-          Sidebar
+          {
+              this.state.routes === "tags"
+            ?
+              <Link
+                to="/tags"
+                onClick={() => this.handleClick("tags")}
+                style={{ textDecoration: 'none' }}
+              >
+                <img src={IconSelected} alt="Not Selected Icon" />
+                <Item
+                  sx={{
+                    marginTop: 0,
+                    marginBottom: 0,
+                    fontSize: '14px',
+                    fontWeight: 400,
+                    lineHeight: '150%',
+                    letterSpacing: '0.4px'
+                }}>
+                  Tags
+                </Item>
+              </Link>
+            :
+              <Link
+                to="/tags"
+                onClick={() => this.handleClick("tags")}
+                style={{ textDecoration: 'none' }}
+              >
+                <img src={IconNotSelected} alt="Not Selected Icon" />
+              </Link>
+          }
         </Item>
       </Grid>
     );
