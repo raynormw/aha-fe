@@ -46,13 +46,13 @@ function App() {
         <ScopedCssBaseline>
            <ThemeProvider theme={theme}>
               <Typography component={'div'}>
-                <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{ flexGrow: 1, boxShadow: 'none' }}>
                   <Grid container>
                     <NavBar />
                     <Grid item xs={6}>
                       <Routes>
-                        <Route path="/" element={<HomePage path="/"/>} />
-                          <Route path="result" element={<ResultPage path="result"/>} />
+                        <Route path="/" element={<HomePage />} />
+                          <Route path="result" element={<ResultPage />} />
                           <Route path="tags" element={<TagsPage />} />
                         <Route path="*" element={<NoMatch />} />
                       </Routes>

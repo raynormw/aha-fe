@@ -46,6 +46,7 @@ export default class NavBar extends Component {
             background: "-webkit-linear-gradient(270deg, #FFD25F 0.13%, #FF5C01 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
+            boxShadow: 'none',
           }}
         >
           LOGO
@@ -58,6 +59,7 @@ export default class NavBar extends Component {
             },
             justifyContent: 'center',
             marginTop: '46.5px',
+            boxShadow: 'none',
           }}
         >
           {
@@ -76,7 +78,8 @@ export default class NavBar extends Component {
                     fontSize: '14px',
                     fontWeight: 400,
                     lineHeight: '150%',
-                    letterSpacing: '0.4px'
+                    letterSpacing: '0.4px',
+                    boxShadow: 'none',
                 }}>
                   Home
                 </Item>
@@ -99,6 +102,7 @@ export default class NavBar extends Component {
             },
             justifyContent: 'center',
             marginTop: '18px',
+            boxShadow: 'none',
           }}
         >
           {
@@ -117,7 +121,8 @@ export default class NavBar extends Component {
                     fontSize: '14px',
                     fontWeight: 400,
                     lineHeight: '150%',
-                    letterSpacing: '0.4px'
+                    letterSpacing: '0.4px',
+                    boxShadow: 'none',
                 }}>
                   Tags
                 </Item>
