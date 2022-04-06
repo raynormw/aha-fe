@@ -1,19 +1,20 @@
 import { BrowserRouter, Routes, Route , Outlet } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { styled } from '@mui/material/styles';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { base_url } from 'services/api';
+import NavBar from 'layouts/NavBar';
 import HomePage from 'routes/HomePage';
 import ResultPage from 'routes/ResultPage';
 import TagsPage from 'routes/TagsPage';
 import NoMatch from 'routes/NoMatch';
 import Store from 'stores/index';
+import { Item } from 'utils/Item';
 import 'App.css';
 
 const theme = createTheme({
@@ -26,15 +27,13 @@ const theme = createTheme({
       desktop: 1440,
     },
   },
+  typography: {
+    fontFamily: [
+      'Ubuntu',
+      'sans-serif',
+    ].join(','),
+  },
 });
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 function App() {
   const desktop = useMediaQuery('(min-width:1440px)');
@@ -46,55 +45,42 @@ function App() {
       <BrowserRouter basename={base_url}>
         <ScopedCssBaseline>
            <ThemeProvider theme={theme}>
-              <Box sx={{ flexGrow: 1 }}>
-                <Grid container>
-                  <Grid
-                    sx={{
-                      display: {
-                        tablet: 'flex',
-                        mobile: 'none'
-                      },
-                      width: {
-                        tablet: 80,
-                        mobile: '100%'
-                      }
-                    }}
-                    item
-                  >
-                    {/* width: 80px */}
-                    <Item>Sidebar</Item>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Routes>
-                      <Route path="/" element={<HomePage />} />
-                        <Route path="result" element={<ResultPage />} />
-                        <Route path="tags" element={<TagsPage />} />
-                      <Route path="*" element={<NoMatch />} />
-                    </Routes>
-                    {/* width: 985px */}
-                    <Item>Content</Item>
-                    <Outlet />
-                  </Grid>
-                  {/* {
-                    desktop
-                    ? */}
-                    <Grid
-                      sx={{
-                        display: {
-                          desktop: 'flex',
-                          notebook: 'none'
-                        }
-                      }}
-                      item
-                    >
-                      {/* width: 375px */}
-                      <Item>Follower</Item>
+              <Typography>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid container>
+                    <NavBar />
+                    <Grid item xs={6}>
+                      <Routes>
+                        <Route path="/" element={<HomePage />} />
+                          <Route path="result" element={<ResultPage />} />
+                          <Route path="tags" element={<TagsPage />} />
+                        <Route path="*" element={<NoMatch />} />
+                      </Routes>
+                      {/* width: 985px */}
+                      <Item>Content</Item>
+                      <Outlet />
                     </Grid>
-                    {/* :
-                    null
-                  } */}
-                </Grid>
-              </Box>
+                    {/* {
+                      desktop
+                      ? */}
+                      <Grid
+                        sx={{
+                          display: {
+                            desktop: 'flex',
+                            notebook: 'none'
+                          }
+                        }}
+                        item
+                      >
+                        {/* width: 375px */}
+                        <Item>Follower</Item>
+                      </Grid>
+                      {/* :
+                      null
+                    } */}
+                  </Grid>
+                </Box>
+              </Typography>
             </ThemeProvider>
         </ScopedCssBaseline>
       </BrowserRouter>
