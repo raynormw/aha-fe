@@ -14,7 +14,7 @@ import ResultPage from 'routes/ResultPage';
 import TagsPage from 'routes/TagsPage';
 import NoMatch from 'routes/NoMatch';
 import Store from 'stores/index';
-import { Item } from 'utils/Item';
+import { Item } from 'utils/Helper';
 import 'App.css';
 
 const theme = createTheme({

@@ -1,10 +1,30 @@
-import React, { Component } from 'react';
+import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-export default class HomePage extends Component {
-  render() {
-    console.log(this.props, 'props home');
-    return (
-      <div>Home Page</div>
-    );
-  }
+import BottomNav from 'components/BottomNav';
+
+function HomePage() {
+  const phone = useMediaQuery('(max-width:640px)');
+
+  return (
+    <Grid
+      sx = {{
+        color: '#FFFFFF',
+      }}
+      container
+    >
+      <Grid item>
+        Home Page
+      </Grid>
+      {
+          phone
+        ?
+          <BottomNav />
+        :
+          null
+      }
+    </Grid>
+  );
 }
+
+export default HomePage;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 
-import { Item } from 'utils/Item';
+import { Item } from 'utils/Helper';
 import IconSelected from 'assets/icons/selected.png';
 import IconNotSelected from 'assets/icons/notSelected.png';
 
