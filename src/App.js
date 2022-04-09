@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -15,7 +14,6 @@ import TagsPage from 'routes/TagsPage';
 import NoMatch from 'routes/NoMatch';
 import Store from 'stores/index';
 import { Item } from 'utils/Helper';
-import 'App.css';
 
 const theme = createTheme({
   breakpoints: {
@@ -33,13 +31,24 @@ const theme = createTheme({
       'sans-serif',
     ].join(','),
   },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          input: {
+            "&::placeholder": {
+              color: "white",
+              opacity: 0.3,
+            },
+            color: "white",
+          }
+        }
+      }
+    }
+  }
 });
 
 function App() {
-  const desktop = useMediaQuery('(min-width:1440px)');
-  const phone = useMediaQuery('(max-width:640px)');
-  console.log('desktop', desktop);
-  console.log('phone', phone);
   return (
     <Provider store={Store}>
       <BrowserRouter basename={base_url}>
@@ -49,7 +58,35 @@ function App() {
                 <Box sx={{ flexGrow: 1, boxShadow: 'none' }}>
                   <Grid container>
                     <NavBar />
-                    <Grid item xs={6}>
+                    <Grid
+                      sx={{
+                        pb: 7,
+                        width: {
+                          desktop: '985px',
+                          tablet: 'calc(100% - 80px)',
+                          mobile: '100%',
+                        },
+                        paddingTop: {
+                          tablet: '54px',
+                          mobile: '27px',
+                        },
+                        paddingLeft: {
+                          laptop: '130px',
+                          tablet: '50px',
+                          mobile: '20px',
+                        },
+                        paddingRight: {
+                          laptop: '130px',
+                          tablet: '50px',
+                          mobile: '20px',
+                        },
+                        display: 'flex',
+                        fontSize: '24px',
+                        fontWeight: 400,
+                        lineHeight: '36px',
+                      }}
+                      item
+                    >
                       <Routes>
                         <Route path="/" element={<HomePage />} />
                           <Route path="result" element={<ResultPage />} />
@@ -57,7 +94,6 @@ function App() {
                         <Route path="*" element={<NoMatch />} />
                       </Routes>
                       {/* width: 985px */}
-                      <Item>Content</Item>
                       <Outlet />
                     </Grid>
                     {/* {
@@ -67,7 +103,7 @@ function App() {
                         sx={{
                           display: {
                             desktop: 'flex',
-                            notebook: 'none'
+                            mobile: 'none'
                           }
                         }}
                         item

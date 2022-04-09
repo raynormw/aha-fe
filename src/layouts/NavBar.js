@@ -22,25 +22,39 @@ export default class NavBar extends Component {
           display: {
             tablet: 'flex',
           },
-          textAlign: 'center',
+          flexDirection: {
+            tablet: 'column',
+          },
+          height: {
+            tablet: '100vh',
+          },
+          background : {
+            tablet: '#1B1B1B',
+          },
           width: {
             tablet: '80px',
             mobile: '100%'
           },
-          flexDirection: {
-            tablet: 'column',
-          },
-          marginTop: {
+          paddingTop: {
             tablet: '37px',
             mobile: '28px'
           },
+          textAlign: 'center',
         }}
         item
       >
         <Item
           sx={{
+            textAlign: {
+              tablet: 'center',
+              mobile: 'left',
+            },
+            marginLeft : {
+              tablet: '0px',
+              mobile: '21px',
+            },
             fontWeight: 700,
-            fontSize: 13,
+            fontSize: '13px',
             lineHeight: '15px',
             letterSpacing: '-0.05em',
             background: "-webkit-linear-gradient(270deg, #FFD25F 0.13%, #FF5C01 100%)",
@@ -60,6 +74,7 @@ export default class NavBar extends Component {
             justifyContent: 'center',
             marginTop: '46.5px',
             boxShadow: 'none',
+            background: '#1B1B1B',
           }}
         >
           {
@@ -103,6 +118,7 @@ export default class NavBar extends Component {
             justifyContent: 'center',
             marginTop: '18px',
             boxShadow: 'none',
+            background: '#1B1B1B',
           }}
         >
           {
