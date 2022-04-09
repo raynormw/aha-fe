@@ -12,7 +12,6 @@ export const CustomButton = styled(ButtonUnstyled)`
   transition: all 150ms ease;
   cursor: pointer;
   border: none;
-  width: 343px;
   height: 40px;
 
   &:hover {

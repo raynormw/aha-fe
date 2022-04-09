@@ -49,6 +49,7 @@ const theme = createTheme({
 });
 
 function App() {
+
   return (
     <Provider store={Store}>
       <BrowserRouter basename={base_url}>
@@ -78,9 +79,9 @@ function App() {
                         paddingRight: {
                           laptop: '130px',
                           tablet: '50px',
-                          mobile: '20px',
                         },
                         display: 'flex',
+                        justifyContent: 'center',
                         fontSize: '24px',
                         fontWeight: 400,
                         lineHeight: '36px',
@@ -97,6 +98,9 @@ function App() {
                     </Grid>
                       <Grid
                         sx={{
+                          width: {
+                            desktop: '375px',
+                          },
                           display: {
                             desktop: 'flex',
                             mobile: 'none'

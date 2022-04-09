@@ -78,7 +78,16 @@ function HomePage() {
           </Grid>
         </Grid>
         <SliderMarks defaultValue={sliderValue} value={sliderValue} onChange={handleSlider} />
-        <Divider sx={{ opacity: 0.1, border: '1px solid #FFFFFF', marginTop: '30px' }} />
+        <Divider
+          sx={{
+            opacity: 0.1,
+            border: '1px solid #FFFFFF',
+            marginTop: {
+              laptop: '30px',
+              mobile: '220px',
+            },
+          }}
+        />
         <CustomButton
           onClick={handleClick}
           sx={{
@@ -87,6 +96,10 @@ function HomePage() {
               mobile: '90px',
             },
             position: 'fixed',
+            width: {
+              tablet: '343px',
+              mobile: 'calc(100% - 40px)',
+            },
           }}
         >
           SEARCH

@@ -26,8 +26,8 @@ const marks = [
     label: '15',
   },
   {
-    value: 50,
-    label: '50',
+    value: 20,
+    label: '20',
   },
 ];
 
@@ -48,7 +48,7 @@ export const SliderMarks = (props) => {
         valueLabelDisplay='auto'
         marks={marks}
         min={3}
-        max={50}
+        max={21}
         size='medium'
         className="slider"
         componentsProps={{
