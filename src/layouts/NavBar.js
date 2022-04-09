@@ -57,9 +57,9 @@ export default class NavBar extends Component {
             fontSize: '13px',
             lineHeight: '15px',
             letterSpacing: '-0.05em',
-            background: "-webkit-linear-gradient(270deg, #FFD25F 0.13%, #FF5C01 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            background: '-webkit-linear-gradient(270deg, #FFD25F 0.13%, #FF5C01 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
             boxShadow: 'none',
           }}
         >

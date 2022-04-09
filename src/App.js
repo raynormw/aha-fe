@@ -93,12 +93,8 @@ function App() {
                           <Route path="tags" element={<TagsPage />} />
                         <Route path="*" element={<NoMatch />} />
                       </Routes>
-                      {/* width: 985px */}
                       <Outlet />
                     </Grid>
-                    {/* {
-                      desktop
-                      ? */}
                       <Grid
                         sx={{
                           display: {
