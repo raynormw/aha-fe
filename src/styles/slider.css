@@ -1,0 +1,25 @@
+.slider {
+  color: #FFD25F;
+}
+
+.slider .thumb {
+  border: 6px solid #FFD05D;
+  background: #1B1B1B;
+}
+
+.slider .rail {
+  background-image: linear-gradient(rgb(255, 210, 95) 0.13%, rgb(255, 92, 1) 100%);
+}
+
+.slider .track {
+  background-image: linear-gradient(rgb(255, 210, 95) 0.13%, rgb(255, 92, 1) 100%);
+}
+
+.slider .markLabel {
+  color: #FFFFFF;
+  opacity: 50%;
+}
+
+.slider .markLabelActive {
+  color: #FFFFFF;
+}
