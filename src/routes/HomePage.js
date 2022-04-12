@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -8,6 +9,7 @@ import { Item } from 'utils/Helper';
 import { SliderMarks } from 'components/SliderMarks';
 import { Input } from 'components/Input';
 import { CustomButton } from 'components/CustomButton';
+import { search } from 'actions/searchAction';
 
 import BottomNav from 'components/BottomNav';
 
@@ -21,9 +23,24 @@ const theme = createTheme({
       desktop: 1440,
     },
   },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          input: {
+            "&::placeholder": {
+              color: "white",
+              opacity: 0.3,
+            },
+            color: "white",
+          }
+        }
+      }
+    }
+  }
 });
 
-function HomePage() {
+function HomePage(props) {
   const phone = useMediaQuery('(max-width:640px)');
   const [name, setName] = useState('');
   const handleChange = (event) => {
@@ -37,7 +54,10 @@ function HomePage() {
     setSliderValue(event.target.value);
   }
   const handleClick = () => {
+    const pageSize = sliderValue;
+    const keyword = name;
     console.log('clicked');
+    props.search(pageSize, keyword);
   }
 
   return (
@@ -71,7 +91,7 @@ function HomePage() {
               marginRight: '10px',
               marginBottom: '30px',
             }}>
-            <Item>30</Item>
+            <Item>{props.total}</Item>
           </Grid>
           <Grid item sx={{ lineHeight: '24px', marginBottom: '30px',}}>
             <Item>results</Item>
@@ -116,4 +136,12 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+const mapStateToProps = state => ({
+  total: state.search.total,
+});
+
+const mapDispatchToProps = dispatch => ({
+  search: (pageSize, keyword) => dispatch(search(pageSize, keyword)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

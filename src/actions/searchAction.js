@@ -2,27 +2,44 @@ import Axios from 'axios';
 
 import { base_api } from 'services/api';
 
-export const search = (data) => {
+export const search = (pageSize, keyword) => {
   return dispatch => {
     dispatch({ type: 'BEGIN_SEARCH' });
     Axios({
       method: 'get',
-      // url: base_api + 'search',
-      url: 'https://itunes.apple.com/search?term=maroon+5&media=music'
-      // data
+      url: base_api + 'users/all?page=1&pageSize=' + pageSize + '&keyword=' + keyword,
     })
     .then((res) => {
-      console.log(res, 'res');
-      // const data = res.data.data;
-      // dispatch({ type: 'SEARCH_SUCCESS', res });
+      const results = res.data;
+      dispatch({ type: 'SEARCH_SUCCESS', payload: results });
     })
     .catch((error) => {
       console.log(error, 'error');
-
-      // dispatch({ type: 'SEARCH_ERROR' });
+      dispatch({ type: 'SEARCH_ERROR', payload: error.message });
     });
   }
 }
+
+// export const search = (pageSize, keyword) => {
+//   return dispatch => {
+//     dispatch({ type: 'BEGIN_SEARCH' });
+//     Axios({
+//       method: 'get',
+//       url: base_api + 'search',
+//       // data
+//     })
+//     .then((res) => {
+//       console.log(res, 'res');
+//       // const data = res.data.data;
+//       // dispatch({ type: 'SEARCH_SUCCESS', res });
+//     })
+//     .catch((error) => {
+//       console.log(error, 'error');
+//
+//       // dispatch({ type: 'SEARCH_ERROR' });
+//     });
+//   }
+// }
 
 // export const addSeller = (data) => {
 //   return dispatch => {
