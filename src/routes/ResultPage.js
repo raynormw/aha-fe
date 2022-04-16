@@ -29,6 +29,7 @@ const theme = createTheme({
 function ResultPage(props) {
 
   const phone = useMediaQuery('(max-width:640px)');
+  const tablet = useMediaQuery('(min-width:640px)');
   const navigate = useNavigate();
   const { state } = useLocation();
   const { pageSize } = state;
@@ -54,7 +55,13 @@ function ResultPage(props) {
                 <Grid
                   key={index}
                   item
-                  sx={{ flexBasis: '30%' }}
+                  sx={{
+                    flex: 1,
+                    flexBasis: {
+                      mobile: '100%',
+                      tablet: '30%',
+                    }
+                  }}
                 >
                   <Box
                     sx={{
@@ -89,7 +96,17 @@ function ResultPage(props) {
         {
           [...Array(pageSize)].map((value, index) => {
             return (
-              <Stack animation="wave" key={index} sx={{ flex: 1, flexBasis: '30%' }}>
+              <Stack
+                animation="wave"
+                key={index}
+                sx={{
+                  flex: 1,
+                  flexBasis: {
+                    mobile: '100%',
+                    tablet: '30%',
+                  }
+                }}
+                >
                 <Skeleton variant="rectangular" height={146} sx={{ backgroundColor: '#FFFFFF', mb: '12px' }} />
                 <Skeleton variant="text" width={87} sx={{ backgroundColor: '#FFFFFF' }} />
                 <Skeleton variant="text" width={69} sx={{ backgroundColor: '#FFFFFF' }} />
@@ -101,7 +118,6 @@ function ResultPage(props) {
     );
   }
 
-  console.log('props result', props);
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -115,57 +131,92 @@ function ResultPage(props) {
           container
           sx={{
             display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
+            flexDirection: {
+              mobile: 'column',
+              tablet: 'row',
+            },
+            alignItems: {
+              mobile: 'left',
+              tablet: 'center',
+            }
           }}
         >
+          {
+            tablet
+              ?
+            <Grid
+              item
+              sx={{
+                position: 'absolute',
+                left: '13%',
+                right: '25.88%',
+                top: '10%',
+                cursor: 'pointer',
+              }}
+            >
+              <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
+            </Grid>
+              :
+            null
+          }
+          {
+            phone
+              ?
+            <Grid item>
+              <ArrowBackIosNewIcon onClick={() => navigate(-1)} /> Home Page
+            </Grid>
+              :
+            null
+          }
           <Grid
             item
             sx={{
-              position: 'absolute',
-              left: '13%',
-              right: '25.88%',
-              top: '10%',
-              cursor: 'pointer',
+              marginTop: '38px',
+              fontSize: '30px',
+              fontWeight: '400',
+              letterSpacing: '0.25px'
             }}
           >
-            <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
-          </Grid>
-          <Grid item sx={{ marginTop: '38px', fontSize: '30px', fontWeight: '400', letterSpacing: '0.25px' }}>
             Results
           </Grid>
         </Grid>
 
         {
           props.data.length > 0
-          ?
+            ?
           renderResult()
-          :
+            :
           renderSkeleton()
         }
         {
           props.isLoadingMore
-          ?
+            ?
           renderSkeleton()
-          :
+            :
           null
         }
         {
           props.isLoading || props.isLoadingMore || props.page >= props.totalPages
-          ?
+            ?
           null
-          :
+            :
           <CustomButton
             onClick={handleClick}
             sx={{
-              marginTop: '40px',
+              marginTop: {
+                tablet: '40px',
+                mobile: '20px',
+              },
               bottom: {
                 tablet: '87px',
                 mobile: '90px',
               },
+              marginBottom:{
+                mobile: '30px',
+              },
               width: {
                 tablet: '343px',
-                mobile: 'calc(100% - 40px)',
+                mobile: '100%',
               },
             }}
           >
@@ -173,11 +224,11 @@ function ResultPage(props) {
           </CustomButton>
         }
         {
-            phone
-          ?
-            <BottomNav />
-          :
-            null
+          phone
+            ?
+          <BottomNav />
+            :
+          null
         }
       </Grid>
     </ThemeProvider>
