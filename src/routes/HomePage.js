@@ -66,7 +66,7 @@ function HomePage(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      {shouldRedirect && <Navigate replace to="/result" />}
+      {shouldRedirect && <Navigate to="result" />}
       <Grid
         sx={{
           color: '#FFFFFF',

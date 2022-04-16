@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -23,6 +25,7 @@ const theme = createTheme({
 function ResultPage(props) {
 
   const phone = useMediaQuery('(max-width:640px)');
+  const navigate = useNavigate();
 
   const renderResult = () => {
     console.log('data', props.data);
@@ -47,9 +50,31 @@ function ResultPage(props) {
         }}
         container
       >
-        <Grid item sx={{ marginTop: '38px', fontSize: '30px', fontWeight: '400', letterSpacing: '0.25px' }}>
-          Results
+        <Grid
+          container
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
+          }}
+        >
+          <Grid
+            item
+            sx={{
+              position: 'absolute',
+              left: '13%',
+              right: '25.88%',
+              top: '10%',
+              cursor: 'pointer',
+            }}
+          >
+            <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
+          </Grid>
+          <Grid item sx={{ marginTop: '38px', fontSize: '30px', fontWeight: '400', letterSpacing: '0.25px' }}>
+            Results
+          </Grid>
         </Grid>
+
         {
           props.data.length > 0
           ?
