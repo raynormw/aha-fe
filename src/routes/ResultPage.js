@@ -10,7 +10,8 @@ import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { Item } from 'utils/Helper';
-import { search } from 'actions/searchAction';
+import { searchMore } from 'actions/searchAction';
+import { CustomButton } from 'components/CustomButton';
 import BottomNav from 'components/BottomNav';
 
 const theme = createTheme({
@@ -32,6 +33,10 @@ function ResultPage(props) {
   const { state } = useLocation();
   const { pageSize } = state;
 
+  const handleClick = () => {
+    props.searchMore(pageSize, props.keyword, (props.page + 1));
+  }
+
   const renderResult = () => {
     return (
       <Grid
@@ -49,7 +54,7 @@ function ResultPage(props) {
                 <Grid
                   key={index}
                   item
-                  sx={{ flex: 1, flexBasis: '30%' }}
+                  sx={{ flexBasis: '30%' }}
                 >
                   <Box
                     sx={{
@@ -58,10 +63,10 @@ function ResultPage(props) {
                       mb: '12px',
                     }}
                   >
-                    <img src={value.avater} alt="Selected Icon" />
+                    <img src={value.avater} alt="Img from API" />
                   </Box>
                   <Item sx={{ fontSize: '15px', fontWeight: '400', color: '#FFFFFF', minWidth: '87px' }}>{value.name}</Item>
-                  <Item sx={{ fontSize: '11px', fontWeight: '400', color: '#B2B2B2', minWidth: '69px' }}>{value.username}</Item>
+                  <Item sx={{ fontSize: '11px', fontWeight: '400', color: '#B2B2B2', minWidth: '69px', boxShadow: 'none' }}>{value.username}</Item>
                 </Grid>
             );
         })}
@@ -139,6 +144,35 @@ function ResultPage(props) {
           renderSkeleton()
         }
         {
+          props.isLoadingMore
+          ?
+          renderSkeleton()
+          :
+          null
+        }
+        {
+          props.isLoading || props.isLoadingMore || props.page >= props.totalPages
+          ?
+          null
+          :
+          <CustomButton
+            onClick={handleClick}
+            sx={{
+              marginTop: '40px',
+              bottom: {
+                tablet: '87px',
+                mobile: '90px',
+              },
+              width: {
+                tablet: '343px',
+                mobile: 'calc(100% - 40px)',
+              },
+            }}
+          >
+            MORE
+          </CustomButton>
+        }
+        {
             phone
           ?
             <BottomNav />
@@ -153,10 +187,14 @@ function ResultPage(props) {
 const mapStateToProps = state => ({
   data: state.search.data,
   isLoading: state.search.isLoading,
+  isLoadingMore: state.search.isLoadingMore,
+  keyword: state.search.keyword,
+  page: state.search.page,
+  totalPages: state.search.totalPages,
 });
 
 const mapDispatchToProps = dispatch => ({
-  search: (pageSize, keyword, page) => dispatch(search(pageSize, keyword, page)),
+  searchMore: (pageSize, keyword, page) => dispatch(searchMore(pageSize, keyword, page)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResultPage);

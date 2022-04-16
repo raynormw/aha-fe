@@ -25,7 +25,7 @@ export default class NavBar extends Component {
           flexDirection: {
             tablet: 'column',
           },
-          height: {
+          minHeight: {
             tablet: '100vh',
           },
           background : {
