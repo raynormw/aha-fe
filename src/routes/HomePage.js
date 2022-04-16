@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Divider from '@mui/material/Divider';
+import { Navigate } from 'react-router-dom';
 
 import { Item } from 'utils/Helper';
 import { SliderMarks } from 'components/SliderMarks';
@@ -53,15 +54,19 @@ function HomePage(props) {
     console.log(event.target.value, 'slider value');
     setSliderValue(event.target.value);
   }
+
+  const [shouldRedirect, setRedirect] = useState(false);
   const handleClick = () => {
     const pageSize = sliderValue;
     const keyword = name;
     console.log('clicked');
     props.search(pageSize, keyword);
+    setRedirect(true);
   }
 
   return (
     <ThemeProvider theme={theme}>
+      {shouldRedirect && <Navigate replace to="/result" />}
       <Grid
         sx={{
           color: '#FFFFFF',

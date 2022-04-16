@@ -1,4 +1,5 @@
 const initialState = {
+  keyword: '',
   data: {},
   total: 0,
   totalPages: 0,
@@ -17,6 +18,7 @@ export default function sellerReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
+        keyword: action.keyword,
         data: action.payload.data,
         total: action.payload.total,
         totalPages: action.payload.totalPages,

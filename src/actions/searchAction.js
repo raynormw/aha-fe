@@ -1,17 +1,18 @@
 import Axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 import { base_api } from 'services/api';
 
-export const search = (pageSize, keyword) => {
+export const search = (pageSize, keyword, page = 1) => {
   return dispatch => {
     dispatch({ type: 'BEGIN_SEARCH' });
     Axios({
       method: 'get',
-      url: base_api + 'users/all?page=1&pageSize=' + pageSize + '&keyword=' + keyword,
+      url: base_api + 'users/all?page=' + page + '&pageSize=' + pageSize + '&keyword=' + keyword,
     })
     .then((res) => {
       const results = res.data;
-      dispatch({ type: 'SEARCH_SUCCESS', payload: results });
+      dispatch({ type: 'SEARCH_SUCCESS', payload: results, keyword });
     })
     .catch((error) => {
       console.log(error, 'error');
