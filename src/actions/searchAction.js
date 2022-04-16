@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import { Navigate } from 'react-router-dom';
 
 import { base_api } from 'services/api';
 

@@ -45,13 +45,11 @@ function HomePage(props) {
   const phone = useMediaQuery('(max-width:640px)');
   const [name, setName] = useState('');
   const handleChange = (event) => {
-    console.log(event.target.value, 'name');
     setName(event.target.value);
   };
 
   const [sliderValue, setSliderValue] = useState(3);
   const handleSlider = (event) => {
-    console.log(event.target.value, 'slider value');
     setSliderValue(event.target.value);
   }
 
@@ -59,14 +57,13 @@ function HomePage(props) {
   const handleClick = () => {
     const pageSize = sliderValue;
     const keyword = name;
-    console.log('clicked');
     props.search(pageSize, keyword);
     setRedirect(true);
   }
 
   return (
     <ThemeProvider theme={theme}>
-      {shouldRedirect && <Navigate to="result" />}
+      {shouldRedirect && <Navigate to="result" state={{ pageSize: sliderValue }} />}
       <Grid
         sx={{
           color: '#FFFFFF',

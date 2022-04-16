@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { Item } from 'utils/Helper';
@@ -26,21 +29,74 @@ function ResultPage(props) {
 
   const phone = useMediaQuery('(max-width:640px)');
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const { pageSize } = state;
 
   const renderResult = () => {
-    console.log('data', props.data);
-
     return (
-      <Grid container>
+      <Grid
+        container
+        sx={{
+          mt: '24px',
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '34px 31px',
+          flexWrap: 'wrap',
+        }}
+      >
         {props.data.map((value, index) => {
             return (
-                <Grid key={index} item>{value.name}</Grid>
+                <Grid
+                  key={index}
+                  item
+                  sx={{ flex: 1, flexBasis: '30%' }}
+                >
+                  <Box
+                    sx={{
+                      border: '1px solid #FFFFFF',
+                      height: '146px',
+                      mb: '12px',
+                    }}
+                  >
+                    <img src={value.avater} alt="Selected Icon" />
+                  </Box>
+                  <Item sx={{ fontSize: '15px', fontWeight: '400', color: '#FFFFFF', minWidth: '87px' }}>{value.name}</Item>
+                  <Item sx={{ fontSize: '11px', fontWeight: '400', color: '#B2B2B2', minWidth: '69px' }}>{value.username}</Item>
+                </Grid>
             );
         })}
       </Grid>
     );
   }
 
+  const renderSkeleton = () => {
+    return (
+      <Grid
+        container
+        sx={{
+          mt: '24px',
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '34px 31px',
+          flexWrap: 'wrap',
+        }}
+      >
+        {
+          [...Array(pageSize)].map((value, index) => {
+            return (
+              <Stack animation="wave" key={index} sx={{ flex: 1, flexBasis: '30%' }}>
+                <Skeleton variant="rectangular" height={146} sx={{ backgroundColor: '#FFFFFF', mb: '12px' }} />
+                <Skeleton variant="text" width={87} sx={{ backgroundColor: '#FFFFFF' }} />
+                <Skeleton variant="text" width={69} sx={{ backgroundColor: '#FFFFFF' }} />
+              </Stack>
+            );
+          }
+        )}
+      </Grid>
+    );
+  }
+
+  console.log('props result', props);
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -80,7 +136,7 @@ function ResultPage(props) {
           ?
           renderResult()
           :
-          null
+          renderSkeleton()
         }
         {
             phone
@@ -96,6 +152,7 @@ function ResultPage(props) {
 
 const mapStateToProps = state => ({
   data: state.search.data,
+  isLoading: state.search.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
