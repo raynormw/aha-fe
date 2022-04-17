@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
@@ -10,6 +10,7 @@ import Card from '@mui/material/Card';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { Item } from 'utils/Helper';
+import tagsServices from 'services/tagsServices';
 
 import BottomNav from 'components/BottomNav';
 
@@ -29,6 +30,18 @@ function TagsPage(props) {
   const phone = useMediaQuery('(max-width:640px)');
   const tablet = useMediaQuery('(min-width:640px)');
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    tagsServices.getTags()
+      .then((res) => {
+        console.log(res, 'res');
+        setData(res);
+      })
+      .catch((err) => {
+        console.log(err, 'error fetch Tags');
+      })
+  }, []);
 
   const renderResult = () => {
     return (
@@ -169,7 +182,13 @@ function TagsPage(props) {
             Tags
           </Grid>
         </Grid>
-        {renderSkeleton()}
+        {
+          data.length > 0
+            ?
+          renderResult()
+            :
+          renderSkeleton()
+        }
         {
           phone
             ?

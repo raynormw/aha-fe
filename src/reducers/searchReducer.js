@@ -1,6 +1,6 @@
 const initialState = {
   keyword: '',
-  data: {},
+  data: [],
   total: 0,
   totalPages: 0,
   page: 0,
