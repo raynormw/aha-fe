@@ -65,7 +65,10 @@ function ResultPage(props) {
                   <Box
                     sx={{
                       border: '1px solid #FFFFFF',
-                      height: '146px',
+                      height: {
+                        tablet: '146px',
+                        mobile: '222px',
+                      },
                       mb: '12px',
                     }}
                   >
@@ -105,7 +108,17 @@ function ResultPage(props) {
                   }
                 }}
                 >
-                <Skeleton variant="rectangular" height={146} sx={{ backgroundColor: '#1B1B1B', mb: '12px' }} />
+                <Skeleton
+                  variant="rectangular"
+                  sx={{
+                    backgroundColor: '#1B1B1B',
+                    mb: '12px',
+                    height: {
+                      tablet: '146px',
+                      mobile: '222px',
+                    },
+                  }}
+                />
                 <Skeleton variant="text" width={87} sx={{ backgroundColor: '#1B1B1B' }} />
                 <Skeleton variant="text" width={69} sx={{ backgroundColor: '#1B1B1B' }} />
               </Stack>
@@ -223,13 +236,6 @@ function ResultPage(props) {
           >
             MORE
           </CustomButton>
-        }
-        {
-          phone
-            ?
-          <BottomNav />
-            :
-          null
         }
       </Grid>
     </ThemeProvider>

@@ -34,7 +34,6 @@ function TagsPage(props) {
   useEffect(() => {
     tagsServices.getTags()
       .then((res) => {
-        console.log(res, 'res');
         setData(res);
       })
       .catch((err) => {
@@ -62,7 +61,7 @@ function TagsPage(props) {
                 item
                 sx={{
                   flexBasis: {
-                    mobile: '100%',
+                    mobile: '45%',
                     tablet: '16%',
                   }
                 }}
@@ -125,7 +124,7 @@ function TagsPage(props) {
                 key={index}
                 sx={{
                   flexBasis: {
-                    mobile: '100%',
+                    mobile: '45%',
                     tablet: '16%',
                   }
                 }}
@@ -191,13 +190,6 @@ function TagsPage(props) {
           renderResult()
             :
           renderSkeleton()
-        }
-        {
-          phone
-            ?
-          <BottomNav />
-            :
-          null
         }
       </Grid>
     </ThemeProvider>
