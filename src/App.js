@@ -31,21 +31,6 @@ const theme = createTheme({
       'sans-serif',
     ].join(','),
   },
-  components: {
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          input: {
-            "&::placeholder": {
-              color: "white",
-              opacity: 0.3,
-            },
-            color: "white",
-          }
-        }
-      }
-    }
-  }
 });
 
 function App() {
