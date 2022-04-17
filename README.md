@@ -25,6 +25,8 @@ yarn start
 
 3. After the startup is complete, open a browser and visit http://localhost:3000
 
+4. See it [Live](https://tirtawiryaputra.com)
+
 ## License
 
-  Made with :heart: by [Tirta Wirya Putra](https://github.com/raynormw)
+  Made with :heart: by [Tirta Wirya Putra](https://tirtawiryaputra.com)
