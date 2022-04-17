@@ -11,7 +11,7 @@ const initialState = {
   errorMessage: '',
 }
 
-export default function sellerReducer(state = initialState, action) {
+export default function searchReducer(state = initialState, action) {
   switch (action.type) {
     case 'BEGIN_SEARCH':
       return {...state, isLoading: true}

@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { Item } from 'utils/Helper';
-import { searchMore } from 'actions/searchAction';
+import { search } from 'actions/searchAction';
 import { CustomButton } from 'components/CustomButton';
 import BottomNav from 'components/BottomNav';
 
@@ -35,7 +35,7 @@ function ResultPage(props) {
   const { pageSize } = state;
 
   const handleClick = () => {
-    props.searchMore(pageSize, props.keyword, (props.page + 1));
+    props.search(pageSize, props.keyword, (props.page + 1));
   }
 
   const renderResult = () => {
@@ -56,11 +56,10 @@ function ResultPage(props) {
                   key={index}
                   item
                   sx={{
-                    flex: 1,
                     flexBasis: {
                       mobile: '100%',
                       tablet: '30%',
-                    }
+                    },
                   }}
                 >
                   <Box
@@ -100,16 +99,15 @@ function ResultPage(props) {
                 animation="wave"
                 key={index}
                 sx={{
-                  flex: 1,
                   flexBasis: {
                     mobile: '100%',
                     tablet: '30%',
                   }
                 }}
                 >
-                <Skeleton variant="rectangular" height={146} sx={{ backgroundColor: '#FFFFFF', mb: '12px' }} />
-                <Skeleton variant="text" width={87} sx={{ backgroundColor: '#FFFFFF' }} />
-                <Skeleton variant="text" width={69} sx={{ backgroundColor: '#FFFFFF' }} />
+                <Skeleton variant="rectangular" height={146} sx={{ backgroundColor: '#1B1B1B', mb: '12px' }} />
+                <Skeleton variant="text" width={87} sx={{ backgroundColor: '#1B1B1B' }} />
+                <Skeleton variant="text" width={69} sx={{ backgroundColor: '#1B1B1B' }} />
               </Stack>
             );
           }
@@ -148,7 +146,10 @@ function ResultPage(props) {
               item
               sx={{
                 position: 'absolute',
-                left: '13%',
+                left: {
+                  tablet: '13%',
+                  desktop: '10%',
+                },
                 right: '25.88%',
                 top: '10%',
                 cursor: 'pointer',
@@ -245,7 +246,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  searchMore: (pageSize, keyword, page) => dispatch(searchMore(pageSize, keyword, page)),
+  search: (pageSize, keyword, page) => dispatch(search(pageSize, keyword, page)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResultPage);
