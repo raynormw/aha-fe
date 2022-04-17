@@ -28,7 +28,6 @@ const theme = createTheme({
 
 function TagsPage(props) {
   const phone = useMediaQuery('(max-width:640px)');
-  const tablet = useMediaQuery('(min-width:640px)');
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
@@ -56,7 +55,7 @@ function TagsPage(props) {
         }}
       >
         {
-          [...Array(15)].map((value, index) => {
+          data.map((value, index) => {
             return (
               <Grid
                 key={index}
@@ -89,11 +88,15 @@ function TagsPage(props) {
                       color: '#FFFFFF',
                     }}
                   >
-                    Cool
+                    {value.name.length > 8 ? value.name.slice(0, 5)+'...' : value.name}
                   </Card>
                 </Box>
-                <Item sx={{ fontSize: '15px', fontWeight: '400', color: '#FFFFFF', minWidth: '32px' }}>test</Item>
-                <Item sx={{ fontSize: '11px', fontWeight: '400', color: '#B2B2B2', minWidth: '63px', boxShadow: 'none' }}>tist</Item>
+                <Item sx={{ fontSize: '15px', fontWeight: '400', color: '#FFFFFF', minWidth: '32px' }}>
+                  {value.name.length > 16 ? value.name.slice(0, 13)+'...' : value.name}
+                </Item>
+                <Item sx={{ fontSize: '11px', fontWeight: '400', color: '#B2B2B2', minWidth: '63px', boxShadow: 'none' }}>
+                  {value.count > 1 ? value.count + " Results" : value.count + " Result"}
+                </Item>
               </Grid>
             );
           }
@@ -165,7 +168,7 @@ function TagsPage(props) {
             phone
               ?
             <Grid item>
-              <ArrowBackIosNewIcon onClick={() => navigate(-1)} /> Home Page
+              <ArrowBackIosNewIcon onClick={() => navigate("/")} /> Home Page
             </Grid>
               :
             null

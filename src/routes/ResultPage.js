@@ -155,7 +155,7 @@ function ResultPage(props) {
                 cursor: 'pointer',
               }}
             >
-              <ArrowBackIosNewIcon onClick={() => navigate(-1)} />
+              <ArrowBackIosNewIcon onClick={() => navigate("/")} />
             </Grid>
               :
             null
@@ -164,7 +164,7 @@ function ResultPage(props) {
             phone
               ?
             <Grid item>
-              <ArrowBackIosNewIcon onClick={() => navigate(-1)} /> Home Page
+              <ArrowBackIosNewIcon onClick={() => navigate("/")} /> Home Page
             </Grid>
               :
             null
