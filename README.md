@@ -25,7 +25,7 @@ yarn start
 
 3. After the startup is complete, open a browser and visit http://localhost:3000
 
-4. See it [Live](https://tirtawiryaputra.com)
+4. See it [Live](https://fe-copy.herokuapp.com/)
 
 ## License
 
